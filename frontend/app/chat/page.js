@@ -11,7 +11,7 @@ export default function ChatPage() {
         minHeight: '100vh', background: '#f5f0ff',
         fontFamily: 'Nunito, sans-serif', color: '#7c3aed', fontSize: 18, fontWeight: 700
       }}>
-        Loading Mingle...
+        Loading abudme...
       </div>
     }>
       <ChatRoom />

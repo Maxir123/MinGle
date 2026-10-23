@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import AdOverlay from './AdOverlay';
 
-const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'https://mingle-kfcz.onrender.com';
+const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || process.env.NEXT_PUBLIC_BACKEND_URL || (process.env.NODE_ENV === 'production' ? 'https://abudme-backend.onrender.com' : 'http://localhost:3001');
 const ICE_SERVERS = {
   iceServers: [
     { urls: 'stun:stun.l.google.com:19302' },
@@ -43,23 +43,29 @@ function AdBannerInline({ onDismiss }) {
   return (
     <div style={{
       display: 'flex', alignItems: 'center', gap: 10,
-      background: 'linear-gradient(135deg,#faf5ff,#f5f0ff)',
-      border: '1px solid #e9d5ff', borderRadius: 10,
-      padding: '8px 12px', position: 'relative',
-      // FIX: prevent any child from overflowing the banner box
+      background: 'linear-gradient(135deg, #ffffff, #f0fdf4)',
+      border: '1.5px solid #bbf7d0', borderRadius: 10,
+      padding: '7px 12px', position: 'relative',
       overflow: 'hidden',
       minWidth: 0,
+      boxShadow: '0 2px 8px rgba(22,163,74,0.08)',
     }}>
-      <div style={{ position: 'absolute', top: 4, left: 7, background: '#e9d5ff', borderRadius: 3, padding: '1px 5px', fontSize: 9, fontWeight: 800, color: '#7c3aed', letterSpacing: '0.05em' }}>AD</div>
-      <div style={{ width: 36, height: 36, borderRadius: 9, background: 'linear-gradient(135deg,#7c3aed,#a855f7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, flexShrink: 0 }}>🌟</div>
-      <div style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
-        <p style={{ fontSize: 12, fontWeight: 800, color: '#1e1b4b', margin: '0 0 1px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Unlock Premium Features</p>
-        <p style={{ fontSize: 11, color: '#6b7280', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>No ads · Priority matching · More</p>
+      <div style={{ position: 'absolute', top: 3, left: 7, background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 3, padding: '1px 5px', fontSize: 8.5, fontWeight: 900, color: '#dc2626', letterSpacing: '0.04em' }}>ABUAD SUPPLY 2025</div>
+      <div style={{ width: 34, height: 38, borderRadius: 6, overflow: 'hidden', flexShrink: 0, border: '1px solid #22c55e', marginTop: 12 }}>
+        <img src="/abuadsupply-poster.jpg" alt="Abuad Supply" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
       </div>
-      <a href="#" onClick={e => e.preventDefault()} style={{ padding: '5px 12px', borderRadius: 7, textDecoration: 'none', background: 'linear-gradient(135deg,#7c3aed,#6d28d9)', color: 'white', fontSize: 11, fontWeight: 800, flexShrink: 0 }}>
-        Open
+      <div style={{ flex: 1, minWidth: 0, overflow: 'hidden', marginTop: 8 }}>
+        <p style={{ fontSize: 12, fontWeight: 900, color: '#111827', margin: '0 0 1px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          Everything You Need, <span style={{ color: '#16a34a' }}>IN ONE PLACE!</span>
+        </p>
+        <p style={{ fontSize: 11, color: '#4b5563', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          Hostel essentials, food, electronics & services • Free Campus Delivery 🚚
+        </p>
+      </div>
+      <a href="https://abuadsupply.com" target="_blank" rel="noopener noreferrer" style={{ padding: '6px 14px', borderRadius: 8, textDecoration: 'none', background: 'linear-gradient(135deg,#16a34a,#15803d)', color: 'white', fontSize: 11.5, fontWeight: 900, flexShrink: 0, boxShadow: '0 2px 8px rgba(22,163,74,0.3)', marginTop: 8 }}>
+        Shop 🛍️ ↗
       </a>
-      <button onClick={onDismiss} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#9ca3af', fontSize: 16, lineHeight: 1, padding: '0 0 0 4px', flexShrink: 0 }}>×</button>
+      <button onClick={onDismiss} aria-label="Dismiss ad" style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#9ca3af', fontSize: 16, lineHeight: 1, padding: '0 0 0 4px', flexShrink: 0, marginTop: 8 }}>×</button>
     </div>
   );
 }
@@ -70,23 +76,29 @@ function AdPopupMobile({ onClose }) {
     <div style={{
       position: 'fixed', inset: 0, zIndex: 9999,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      background: 'rgba(30,27,75,0.6)', backdropFilter: 'blur(6px)',
-      padding: 20,
+      background: 'rgba(5,25,12,0.7)', backdropFilter: 'blur(6px)',
+      padding: 16,
     }} onClick={e => e.target === e.currentTarget && onClose()}>
-      <div style={{ background: 'white', borderRadius: 18, overflow: 'hidden', width: '100%', maxWidth: 320, boxShadow: '0 20px 60px rgba(0,0,0,0.3)' }}>
-        <div style={{ height: 150, background: 'linear-gradient(135deg,#7c3aed,#a855f7,#ec4899)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 6, position: 'relative' }}>
-          <div style={{ position: 'absolute', top: 8, left: 10, background: 'rgba(255,255,255,0.2)', borderRadius: 5, padding: '1px 6px', color: 'rgba(255,255,255,0.8)', fontSize: 10, fontWeight: 800 }}>AD</div>
-          <button onClick={onClose} style={{ position: 'absolute', top: 8, right: 10, background: 'rgba(0,0,0,0.2)', border: 'none', borderRadius: '50%', width: 26, height: 26, color: 'white', fontSize: 16, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
-          <div style={{ fontSize: 36 }}>🌟</div>
-          <p style={{ color: 'white', fontWeight: 800, fontSize: 16, margin: 0 }}>Unlock Premium</p>
-          <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 12, margin: 0 }}>No ads · Priority matching</p>
+      <div style={{ background: 'white', borderRadius: 20, overflow: 'hidden', width: '100%', maxWidth: 320, boxShadow: '0 20px 60px rgba(0,0,0,0.35)', border: '1.5px solid #86efac' }}>
+        <div style={{ height: 160, position: 'relative', overflow: 'hidden' }}>
+          <img src="/abuadsupply-poster.jpg" alt="Abuad Supply Poster" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%)' }} />
+          <div style={{ position: 'absolute', top: 8, left: 10, background: '#dc2626', borderRadius: 4, padding: '2px 6px', color: 'white', fontSize: 9, fontWeight: 900 }}>ABUAD SUPPLY 2025</div>
+          <button onClick={onClose} aria-label="Close ad" style={{ position: 'absolute', top: 8, right: 10, background: 'rgba(0,0,0,0.4)', border: 'none', borderRadius: '50%', width: 26, height: 26, color: 'white', fontSize: 16, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
+          <div style={{ position: 'absolute', bottom: 10, left: 12, right: 12 }}>
+            <p style={{ color: 'white', fontWeight: 900, fontSize: 15, margin: 0 }}>Everything You Need,</p>
+            <p style={{ color: '#4ade80', fontWeight: 900, fontSize: 15, margin: 0 }}>IN ONE PLACE!</p>
+          </div>
         </div>
         <div style={{ padding: '14px 16px' }}>
-          <a href="#" onClick={e => { e.preventDefault(); onClose(); }} style={{ display: 'block', padding: '10px', background: 'linear-gradient(135deg,#7c3aed,#6d28d9)', color: 'white', fontWeight: 800, fontSize: 14, textAlign: 'center', borderRadius: 10, textDecoration: 'none', boxShadow: '0 4px 14px rgba(124,58,237,0.35)' }}>
-            Open →
+          <p style={{ fontSize: 12, color: '#4b5563', margin: '0 0 12px', lineHeight: 1.4 }}>
+            Shop provisions, hostel essentials, tech & book student services with <strong>FREE campus delivery</strong>!
+          </p>
+          <a href="https://abuadsupply.com" target="_blank" rel="noopener noreferrer" onClick={onClose} style={{ display: 'block', padding: '11px', background: 'linear-gradient(135deg,#16a34a,#15803d)', color: 'white', fontWeight: 900, fontSize: 13.5, textAlign: 'center', borderRadius: 10, textDecoration: 'none', boxShadow: '0 4px 14px rgba(22,163,74,0.35)' }}>
+            Start Shopping 🛍️ ↗
           </a>
-          <button onClick={onClose} style={{ display: 'block', width: '100%', marginTop: 8, padding: 6, background: 'none', border: 'none', cursor: 'pointer', color: '#9ca3af', fontSize: 12, fontFamily: 'inherit' }}>
-            No thanks
+          <button onClick={onClose} style={{ display: 'block', width: '100%', marginTop: 8, padding: 6, background: 'none', border: 'none', cursor: 'pointer', color: '#9ca3af', fontSize: 12, fontFamily: 'inherit', fontWeight: 600 }}>
+            Continue to Chat
           </button>
         </div>
       </div>
@@ -95,10 +107,10 @@ function AdPopupMobile({ onClose }) {
 }
 
 /* ── Main ─────────────────────────────────────────────────────── */
-export default function ChatRoom() {
+export default function ChatRoom({ forceMode } = {}) {
   const params    = useSearchParams();
   const router    = useRouter();
-  const mode      = params.get('mode') || 'video';
+  const mode      = forceMode || params.get('mode') || 'video';
   const interests = params.get('interests') || '';
 
   /* refs */
@@ -109,8 +121,10 @@ export default function ChatRoom() {
   const remoteVideoRef = useRef(null);
   const chatEndRef     = useRef(null);
   const partnerIdRef   = useRef(null);
+  const pendingCandidatesRef = useRef([]);
   const nextCount      = useRef(0);
   const hideTimer      = useRef(null);
+  const pendingMatchAfterAdRef = useRef(false);
   // FIX: ref for input so we can refocus after send (keyboard stays open)
   const inputRef       = useRef(null);
 
@@ -135,6 +149,7 @@ export default function ChatRoom() {
   // FIX: start hidden — shows on tap for 2s then hides again
   const [showCtrl,      setShowCtrl]     = useState(false);
   const [inputBottom,   setInputBottom]  = useState(0);
+  const [isBanned,      setIsBanned]     = useState(false);
   // FIX: capture initial height once so keyboard never shifts the video layout
   const [appHeight,     setAppHeight]    = useState('100%');
 
@@ -200,15 +215,28 @@ export default function ChatRoom() {
       socket.on('offer', async ({ offer, from }) => {
         if (!pcRef.current) await createPC(from);
         await pcRef.current.setRemoteDescription(new RTCSessionDescription(offer));
+        for (const c of pendingCandidatesRef.current) {
+          try { await pcRef.current.addIceCandidate(new RTCIceCandidate(c)); } catch {}
+        }
+        pendingCandidatesRef.current = [];
         const ans = await pcRef.current.createAnswer();
         await pcRef.current.setLocalDescription(ans);
         socket.emit('answer', { answer: ans, to: from });
       });
       socket.on('answer', async ({ answer }) => {
         await pcRef.current?.setRemoteDescription(new RTCSessionDescription(answer));
+        for (const c of pendingCandidatesRef.current) {
+          try { await pcRef.current?.addIceCandidate(new RTCIceCandidate(c)); } catch {}
+        }
+        pendingCandidatesRef.current = [];
       });
       socket.on('ice-candidate', async ({ candidate }) => {
-        try { if (candidate) await pcRef.current?.addIceCandidate(new RTCIceCandidate(candidate)); } catch {}
+        if (!candidate) return;
+        if (pcRef.current && pcRef.current.remoteDescription && pcRef.current.remoteDescription.type) {
+          try { await pcRef.current.addIceCandidate(new RTCIceCandidate(candidate)); } catch {}
+        } else {
+          pendingCandidatesRef.current.push(candidate);
+        }
       });
       socket.on('chat-message', ({ message, timestamp }) => addMsg({ text: message, from: 'stranger', ts: timestamp }));
       socket.on('partner-left', () => {
@@ -216,6 +244,13 @@ export default function ChatRoom() {
         sys('👋 Stranger left. Click Start to find someone new.');
         closePeer();
         if (remoteVideoRef.current) remoteVideoRef.current.srcObject = null;
+      });
+      socket.on('banned', () => {
+        setIsBanned(true);
+        sys('🚫 You have been banned.');
+        closePeer();
+        if (remoteVideoRef.current) remoteVideoRef.current.srcObject = null;
+        setStatus('disconnected');
       });
     })();
     return () => { socket?.emit('leave'); socket?.disconnect(); closeAll(); };
@@ -277,7 +312,7 @@ export default function ChatRoom() {
     await createPC(pid);
     if (isInit) { const o = await pcRef.current.createOffer(); await pcRef.current.setLocalDescription(o); socketRef.current?.emit('offer', { offer: o, to: pid }); }
   };
-  const closePeer = () => { try { pcRef.current?.close(); } catch {} pcRef.current = null; };
+  const closePeer = () => { try { pcRef.current?.close(); } catch {} pcRef.current = null; pendingCandidatesRef.current = []; };
   const closeAll  = () => { closePeer(); localStreamRef.current?.getTracks().forEach(t => t.stop()); localStreamRef.current = null; };
 
   /* ── actions ─────────────────────────────────────────────────── */
@@ -291,17 +326,27 @@ export default function ChatRoom() {
   };
   const handleNext = () => {
     nextCount.current += 1;
-    if (nextCount.current % 4 === 0) setShowOverlayAd(true);
     socketRef.current?.emit('leave'); closePeer();
     if (remoteVideoRef.current) remoteVideoRef.current.srcObject = null;
     setRemoteReady(false); setMessages([]);
-    setTimeout(() => socketRef.current?.emit('find-match', { mode, interests }), 300);
+    if (nextCount.current % 4 === 0) {
+      pendingMatchAfterAdRef.current = true;
+      setShowOverlayAd(true);
+    } else {
+      setTimeout(() => socketRef.current?.emit('find-match', { mode, interests }), 300);
+    }
   };
   const handleStop = () => {
     socketRef.current?.emit('leave'); closePeer();
     setStatus('idle'); setRemoteReady(false);
     if (remoteVideoRef.current) remoteVideoRef.current.srcObject = null;
     sys('Stopped. Click Start to find someone new.');
+  };
+  const handleReport = () => {
+    if (status !== 'connected') return;
+    if (!window.confirm('Report this stranger? Repeated reports will result in a ban.')) return;
+    socketRef.current?.emit('report');
+    sys('🚩 Stranger was reported.');
   };
 
   // FIX: after clearing the input, immediately refocus it so the keyboard
@@ -373,7 +418,7 @@ export default function ChatRoom() {
           zIndex: 10,
         }}>
           <button onClick={() => router.push('/')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-            <Image src="/logo.png" alt="Mingle" width={isMobile ? 70 : 88} height={28} style={{ objectFit: 'contain' }} />
+            <Image src="/logo.png" alt="abudme" width={isMobile ? 36 : 42} height={isMobile ? 36 : 42} style={{ objectFit: 'contain' }} priority />
           </button>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <StatusBadge status={status} />
@@ -458,7 +503,7 @@ export default function ChatRoom() {
                 </div>
               )}
               <div style={{ position: 'absolute', bottom: 7, left: 9, background: 'rgba(0,0,0,0.4)', borderRadius: 5, padding: '2px 7px', color: 'rgba(255,255,255,0.75)', fontSize: 10, fontWeight: 700 }}>Stranger</div>
-              <div style={{ position: 'absolute', bottom: 7, right: 9, color: 'rgba(255,255,255,0.18)', fontSize: 10, fontWeight: 800, pointerEvents: 'none' }}>mingle.com</div>
+              <div style={{ position: 'absolute', bottom: 7, right: 9, color: 'rgba(255,255,255,0.18)', fontSize: 10, fontWeight: 800, pointerEvents: 'none' }}>abudme.com</div>
             </div>
 
             {/* ── My video ── */}
@@ -555,7 +600,7 @@ export default function ChatRoom() {
           )}
 
           {/* action buttons */}
-          <div style={{ display: 'flex', gap: isMobile ? 5 : 7, marginLeft: 'auto' }}>
+          <div style={{ display: 'flex', gap: isMobile ? 5 : 7, marginLeft: 'auto', alignItems: 'center' }}>
             {(['Start','Next ⏩','Stop ⏹']).map((label, i) => {
               const colors = [
                 'linear-gradient(135deg,#7c3aed,#6d28d9)',
@@ -568,7 +613,7 @@ export default function ChatRoom() {
                 '0 2px 10px rgba(239,68,68,0.35)',
               ];
               const handlers = [handleStart, handleNext, handleStop];
-              const disabled = (i === 0 && status === 'waiting') || (i > 0 && status === 'idle');
+              const disabled = isBanned || (i === 0 && status === 'waiting') || (i > 0 && status === 'idle');
               return (
                 <button key={label} onClick={handlers[i]} disabled={disabled} style={{
                   padding: isMobile ? '6px 10px' : '7px 16px',
@@ -584,6 +629,20 @@ export default function ChatRoom() {
                 </button>
               );
             })}
+            {/* Report button */}
+            <button onClick={handleReport} disabled={status !== 'connected' || isBanned} style={{
+              padding: isMobile ? '6px 10px' : '7px 14px',
+              borderRadius: 9, border: 'none',
+              cursor: status !== 'connected' || isBanned ? 'not-allowed' : 'pointer',
+              background: status !== 'connected' || isBanned ? '#e5e7eb' : 'linear-gradient(135deg,#f97316,#ea580c)',
+              color: status !== 'connected' || isBanned ? '#9ca3af' : 'white',
+              fontWeight: 800, fontSize: isMobile ? 11 : 12,
+              fontFamily: 'Nunito, sans-serif',
+              boxShadow: status !== 'connected' || isBanned ? 'none' : '0 2px 10px rgba(249,115,22,0.35)',
+              transition: 'all 0.15s', whiteSpace: 'nowrap',
+            }}>
+              🚩 Report
+            </button>
           </div>
         </div>
 
@@ -677,15 +736,7 @@ export default function ChatRoom() {
             onFocus={e => (e.target.style.borderColor = '#a78bfa')}
             onBlur={e => (e.target.style.borderColor = '#ede9fe')}
           />
-          {/* Start */}
-          <button onClick={handleStart} style={{
-            padding: '8px 14px', borderRadius: 20, border: 'none', cursor: 'pointer', flexShrink: 0,
-            background: 'linear-gradient(135deg,#7c3aed,#6d28d9)', color: 'white',
-            fontWeight: 800, fontSize: 13, fontFamily: 'Nunito, sans-serif',
-            boxShadow: '0 2px 10px rgba(124,58,237,0.35)',
-          }}>
-            Start
-          </button>
+
           {/* Send */}
           <button onClick={handleSend} disabled={status !== 'connected' || !inputMsg.trim()} style={{
             width: 36, height: 36, borderRadius: '50%', border: 'none', cursor: 'pointer', flexShrink: 0,
@@ -704,7 +755,13 @@ export default function ChatRoom() {
 
       </div>{/* end ROOT */}
 
-      {showOverlayAd && <AdOverlay onClose={() => setShowOverlayAd(false)} />}
+      {showOverlayAd && <AdOverlay onClose={() => {
+        setShowOverlayAd(false);
+        if (pendingMatchAfterAdRef.current) {
+          pendingMatchAfterAdRef.current = false;
+          socketRef.current?.emit('find-match', { mode, interests });
+        }
+      }} />}
     </>
   );
 }

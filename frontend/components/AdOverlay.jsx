@@ -7,8 +7,11 @@ export default function AdOverlay({ onClose }) {
   const [canSkip, setCanSkip] = useState(false);
 
   useEffect(() => {
-    if (countdown <= 0) { setCanSkip(true); return; }
-    const t = setTimeout(() => setCountdown(c => c - 1), 1000);
+    if (countdown <= 0) {
+      setCanSkip(true);
+      return;
+    }
+    const t = setTimeout(() => setCountdown((c) => c - 1), 1000);
     return () => clearTimeout(t);
   }, [countdown]);
 
@@ -18,52 +21,101 @@ export default function AdOverlay({ onClose }) {
     <div
       className="fade-in"
       style={{
-        position: 'fixed', inset: 0, zIndex: 9998,
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        background: 'rgba(17, 24, 39, 0.85)',
-        backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)',
+        position: 'fixed',
+        inset: 0,
+        zIndex: 9998,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'rgba(5, 20, 10, 0.88)',
+        backdropFilter: 'blur(6px)',
+        WebkitBackdropFilter: 'blur(6px)',
         padding: 16,
       }}
     >
       <div
         className="fade-in-up"
         style={{
-          background: '#111827', borderRadius: 18, overflow: 'hidden',
-          width: '100%', maxWidth: 420,
-          boxShadow: '0 25px 60px rgba(0,0,0,0.5)', position: 'relative',
+          background: '#0f172a',
+          borderRadius: 22,
+          overflow: 'hidden',
+          width: '100%',
+          maxWidth: 420,
+          boxShadow: '0 25px 60px rgba(0,0,0,0.6), 0 0 0 1.5px rgba(34,197,94,0.3)',
+          position: 'relative',
         }}
       >
-        {/* Skip button */}
-        <div style={{ position: 'absolute', bottom: 16, right: 16, zIndex: 1 }}>
+        {/* Top bar with Free Delivery */}
+        <div
+          style={{
+            background: 'linear-gradient(90deg, #15803d, #16a34a, #dc2626)',
+            padding: '6px 14px',
+            color: 'white',
+            fontSize: 10.5,
+            fontWeight: 800,
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <span>🚚 FREE DELIVERY ON CAMPUS</span>
+          <span style={{ opacity: 0.9 }}>Together We Grow!</span>
+        </div>
+
+        {/* Skip button / Countdown */}
+        <div style={{ position: 'absolute', top: 40, right: 14, zIndex: 10 }}>
           {canSkip ? (
             <button
               onClick={onClose}
               className="fade-in"
               style={{
-                padding: '8px 16px', borderRadius: 8, border: 'none', cursor: 'pointer',
-                background: 'white', color: '#1e1b4b', fontWeight: 800, fontSize: 13,
+                padding: '6px 14px',
+                borderRadius: 8,
+                border: 'none',
+                cursor: 'pointer',
+                background: 'white',
+                color: '#15803d',
+                fontWeight: 900,
+                fontSize: 12,
                 fontFamily: 'Nunito, sans-serif',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.4)',
               }}
             >
               Skip Ad ⏩
             </button>
           ) : (
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <svg width="46" height="46" viewBox="0 0 46 46" style={{ transform: 'rotate(-90deg)' }}>
-                <circle cx="23" cy="23" r="20" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="3" />
+              <svg width="42" height="42" viewBox="0 0 46 46" style={{ transform: 'rotate(-90deg)' }}>
                 <circle
-                  cx="23" cy="23" r="20" fill="none"
-                  stroke="#a78bfa" strokeWidth="3"
+                  cx="23"
+                  cy="23"
+                  r="20"
+                  fill="rgba(0,0,0,0.4)"
+                  stroke="rgba(255,255,255,0.2)"
+                  strokeWidth="3"
+                />
+                <circle
+                  cx="23"
+                  cy="23"
+                  r="20"
+                  fill="none"
+                  stroke="#22c55e"
+                  strokeWidth="3"
                   strokeDasharray={CIRCUMFERENCE}
-                  strokeDashoffset={CIRCUMFERENCE - (CIRCUMFERENCE * (5 - countdown) / 5)}
+                  strokeDashoffset={CIRCUMFERENCE - (CIRCUMFERENCE * (5 - countdown)) / 5}
                   strokeLinecap="round"
                   style={{ transition: 'stroke-dashoffset 1s linear' }}
                 />
                 <text
-                  x="23" y="23"
-                  textAnchor="middle" dominantBaseline="central"
-                  fill="white" fontSize="13" fontWeight="bold"
+                  x="23"
+                  y="23"
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fill="white"
+                  fontSize="13"
+                  fontWeight="bold"
                   style={{ transform: 'rotate(90deg)', transformOrigin: '23px 23px' }}
                 >
                   {countdown}
@@ -73,66 +125,110 @@ export default function AdOverlay({ onClose }) {
           )}
         </div>
 
-        {/* Video ad placeholder */}
-        <div style={{
-          height: 220,
-          background: 'linear-gradient(135deg,#1e1b4b 0%,#312e81 50%,#4c1d95 100%)',
-          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12,
-          position: 'relative', overflow: 'hidden',
-        }}>
-          {/* Animated rings */}
-          <div style={{
-            position: 'absolute', width: 200, height: 200, borderRadius: '50%',
-            border: '1px solid rgba(167,139,250,0.15)',
-            animation: 'spin 8s linear infinite',
-          }} />
-          <div style={{
-            position: 'absolute', width: 140, height: 140, borderRadius: '50%',
-            border: '1px solid rgba(167,139,250,0.1)',
-            animation: 'spin 5s linear infinite reverse',
-          }} />
-          <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
+        {/* Visual Poster Area */}
+        <div
+          style={{
+            position: 'relative',
+            height: 230,
+            overflow: 'hidden',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #1e1b4b 100%)',
+          }}
+        >
+          <img
+            src="/abuadsupply-poster.jpg"
+            alt="Abuad Supply Poster"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center 20%',
+              filter: 'brightness(0.9)',
+            }}
+          />
 
-          {/* Play icon */}
-          <div style={{
-            width: 60, height: 60, borderRadius: '50%', background: 'rgba(255,255,255,0.1)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            border: '2px solid rgba(255,255,255,0.2)',
-          }}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </div>
-          <p style={{ color: 'white', fontWeight: 800, fontSize: 16, margin: 0 }}>Advertisement</p>
-          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, margin: 0 }}>Your ad could be here</p>
+          {/* Overlay gradient for text readability */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to top, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.3) 50%, rgba(15,23,42,0.6) 100%)',
+            }}
+          />
 
-          {/* AD badge */}
-          <div style={{
-            position: 'absolute', top: 10, left: 12,
-            background: 'rgba(255,255,255,0.15)', borderRadius: 5, padding: '2px 7px',
-            color: 'rgba(255,255,255,0.7)', fontSize: 11, fontWeight: 700,
-          }}>
-            AD
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 14,
+              left: 16,
+              right: 16,
+              textAlign: 'left',
+            }}
+          >
+            <div
+              style={{
+                display: 'inline-block',
+                background: '#dc2626',
+                color: 'white',
+                fontSize: 9.5,
+                fontWeight: 900,
+                padding: '2px 7px',
+                borderRadius: 5,
+                marginBottom: 4,
+                letterSpacing: '0.04em',
+              }}
+            >
+              ABUAD SUPPLY 2025
+            </div>
+            <h3 style={{ color: 'white', fontWeight: 900, fontSize: 18, margin: '0 0 2px' }}>
+              Everything You Need, <span style={{ color: '#22c55e' }}>IN ONE PLACE!</span>
+            </h3>
+            <p style={{ color: '#94a3b8', fontSize: 11.5, margin: 0 }}>
+              Hostel essentials, electronics, fashion, food &amp; verified student services.
+            </p>
           </div>
         </div>
 
-        {/* Bottom CTA */}
-        <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+        {/* Bottom CTA bar */}
+        <div
+          style={{
+            padding: '14px 18px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 12,
+            background: '#0b1120',
+          }}
+        >
           <div>
-            <p style={{ color: 'white', fontWeight: 800, fontSize: 14, margin: '0 0 2px' }}>Sponsored Content</p>
-            <p style={{ color: '#9ca3af', fontSize: 12, margin: 0 }}>Advertisement • Mingle Partner</p>
+            <p style={{ color: 'white', fontWeight: 800, fontSize: 13, margin: '0 0 2px' }}>
+              abuadsupply.com
+            </p>
+            <p style={{ color: '#22c55e', fontSize: 11, fontWeight: 700, margin: 0 }}>
+              Spend less, enjoy more.
+            </p>
           </div>
+
           <a
-            href="#"
-            onClick={(e) => e.preventDefault()}
+            href="https://abuadsupply.com"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
-              padding: '8px 18px', borderRadius: 8, textDecoration: 'none',
-              background: 'linear-gradient(135deg,#7c3aed,#6d28d9)',
-              color: 'white', fontSize: 13, fontWeight: 800, fontFamily: 'Nunito, sans-serif',
+              padding: '9px 18px',
+              borderRadius: 10,
+              textDecoration: 'none',
+              background: 'linear-gradient(135deg, #16a34a, #15803d)',
+              color: 'white',
+              fontSize: 13,
+              fontWeight: 800,
+              fontFamily: 'Nunito, sans-serif',
               flexShrink: 0,
+              boxShadow: '0 2px 14px rgba(22,163,74,0.4)',
             }}
           >
-            Visit →
+            Visit Store 🛍️ ↗
           </a>
         </div>
       </div>

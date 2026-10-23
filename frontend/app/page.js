@@ -4,8 +4,9 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import AdPopup from '../components/AdPopup';
+import AdBanner from '../components/AdBanner';
 
-const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'https://mingle-kfcz.onrender.com';
+const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || process.env.NEXT_PUBLIC_BACKEND_URL || (process.env.NODE_ENV === 'production' ? 'https://abudme-backend.onrender.com' : 'http://localhost:3001');
 
 // ── Sub-components ─────────────────────────────────────────────────────────
 
@@ -104,19 +105,19 @@ export default function HomePage() {
   const faqs = [
     {
       q: 'How does interest matching work?',
-      a: 'Enter topics you care about and Mingle will try to connect you with someone who shares similar interests. Matching is instant and random within your interest group.',
+      a: 'Enter topics you care about and abudme will try to connect you with someone who shares similar interests. Matching is instant and random within your interest group.',
     },
     {
-      q: 'How does Mingle help keep chats safe?',
+      q: 'How does abudme help keep chats safe?',
       a: 'Our moderation system monitors chats in real time. All users must agree to community guidelines before chatting. You can report and skip anyone at any time.',
     },
     {
-      q: 'Why choose Mingle to chat with strangers online?',
-      a: 'Mingle is completely free, requires no account, and connects you with real people from around the world instantly. It\'s the easiest way to meet new people online.',
+      q: 'Why choose abudme to chat with strangers online?',
+      a: 'abudme is completely free, requires no account, and connects you with real people from around the world instantly. It\'s the easiest way to meet new people online.',
     },
     {
-      q: 'Can I use Mingle on my phone?',
-      a: 'Yes! Mingle is fully optimized for mobile devices. Both text and video chat work seamlessly on Android and iOS.',
+      q: 'Can I use abudme on my phone?',
+      a: 'Yes! abudme is fully optimized for mobile devices. Both text and video chat work seamlessly on Android and iOS.',
     },
   ];
 
@@ -224,7 +225,7 @@ export default function HomePage() {
             padding: '12px 24px',
           }}
         >
-          <Image src="/logo.png" alt="Mingle" width={110} height={40} style={{ objectFit: 'contain' }} />
+          <Image src="/logo.png" alt="abudme" width={56} height={56} style={{ objectFit: 'contain', width: 'auto', height: 52 }} priority />
 
           {/* Online Count */}
           <div
@@ -295,8 +296,8 @@ export default function HomePage() {
               Chat with Strangers
             </h1>
             <p style={{ textAlign: 'center', color: '#6b7280', fontSize: 14, marginBottom: 24, lineHeight: 1.6 }}>
-              Ready to meet someone new? Mingle makes it easy to chat with strangers
-              in random video or text chats. It&apos;s simple, fast, and time to start mingling!
+              Ready to meet someone new? abudme makes it easy to chat with strangers
+              in random video or text chats. It&apos;s simple, fast, and time to start connecting!
             </p>
 
             {/* Mode Toggle */}
@@ -398,6 +399,9 @@ export default function HomePage() {
               </span>
             </div>
 
+            {/* Campus Partner Promo Banner */}
+            <AdBanner />
+
             {/* Features */}
             <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: 28 }}>
               {features.map((f, i) => (
@@ -450,7 +454,19 @@ export default function HomePage() {
 
           {/* Footer */}
           <footer style={{ marginTop: 20, textAlign: 'center', color: '#9ca3af', fontSize: 12 }}>
-            © {new Date().getFullYear()} Mingle.com &nbsp;|&nbsp;
+            <div style={{ marginBottom: 8, fontSize: 12, color: '#6b7280' }}>
+              Campus Partner:{' '}
+              <a
+                href="https://abuadsupply.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: '#16a34a', fontWeight: 800, textDecoration: 'none' }}
+              >
+                Abuad Supply 2025 ↗
+              </a>{' '}
+              — Spend less, enjoy more.
+            </div>
+            © {new Date().getFullYear()} abudme.com &nbsp;|&nbsp;
             <a href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>Blog</a> &nbsp;|&nbsp;
             <a href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>Rules</a> &nbsp;|&nbsp;
             <a href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>Terms</a> &nbsp;|&nbsp;

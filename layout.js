@@ -1,15 +1,2 @@
-import './globals.css';
-
-export const metadata = {
-  title: 'Mingle – Chat with Strangers',
-  description: 'Meet new people instantly.',
-};
-
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
-}
-
+// This file is unused. The actual layout is in MinGle/frontend/app/layout.js
+export {};

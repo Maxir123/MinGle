@@ -1,12 +1,12 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Mingle – Chat with Strangers',
+  title: 'abudme – Chat with Strangers',
   description:
     'Meet new people instantly. Free random video & text chat with strangers worldwide.',
-  keywords: 'random chat, video chat, strangers, mingle, omegle alternative',
+  keywords: 'random chat, video chat, strangers, abudme, omegle alternative',
   openGraph: {
-    title: 'Mingle – Chat with Strangers',
+    title: 'abudme – Chat with Strangers',
     description: 'Meet new people instantly.',
     type: 'website',
   },

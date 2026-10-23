@@ -1,4 +1,4 @@
-# ♛ Mingle — Anonymous Video Chat Platform
+# ♛ abudme — Anonymous Video Chat Platform
 
 > A premium, anonymous video chat platform connecting strangers worldwide. Built with Next.js, Node.js, Socket.IO & WebRTC.
 
@@ -7,7 +7,7 @@
 ## 🗂️ Folder Structure
 
 ```
-mingle/
+abudme/
 ├── backend/
 │   ├── package.json
 │   └── server.js            ← Node.js + Express + Socket.IO
@@ -49,8 +49,8 @@ mingle/
 
 ```bash
 # If using git
-git clone https://github.com/YOUR_USERNAME/mingle.git
-cd mingle
+git clone https://github.com/YOUR_USERNAME/abudme.git
+cd abudme
 ```
 
 ### Step 2 — Set up the Backend
@@ -63,7 +63,7 @@ npm run dev        # starts on http://localhost:4000
 
 You should see:
 ```
-🚀 Mingle backend running on http://localhost:4000
+🚀 abudme backend running on http://localhost:4000
 ```
 
 ### Step 3 — Set up the Frontend
@@ -101,7 +101,7 @@ Open **http://localhost:3000** in two different browser tabs (or two devices).
    - **Build Command:** `npm install`
    - **Start Command:** `npm start`
    - **Environment:** Node
-5. Click **Deploy** → copy the URL (e.g. `https://mingle-backend.onrender.com`)
+5. Click **Deploy** → copy the URL (e.g. `https://abudme-backend.onrender.com`)
 
 ### Frontend → Vercel (Free)
 
@@ -109,7 +109,7 @@ Open **http://localhost:3000** in two different browser tabs (or two devices).
 2. Import your GitHub repo → set **Root Directory** to `frontend`
 3. Add Environment Variable:
    - Key: `NEXT_PUBLIC_BACKEND_URL`
-   - Value: `https://mingle-backend.onrender.com` (your Render URL)
+   - Value: `https://abudme-backend.onrender.com` (your Render URL)
 4. Click **Deploy** → get your live URL!
 
 ---
@@ -232,4 +232,4 @@ On "Next" button:
 
 ## 📄 License
 
-MIT © 2025 Mingle
+MIT © 2025 abudme

@@ -1,7 +1,7 @@
 {
-  "name": "mingle-backend",
+  "name": "abudme-backend",
   "version": "1.0.0",
-  "description": "Mingle - Random Chat Backend",
+  "description": "abudme - Random Chat Backend",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

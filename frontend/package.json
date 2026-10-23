@@ -1,5 +1,5 @@
 {
-  "name": "mingle-frontend",
+  "name": "abudme-frontend",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-   "next": "latest",
+    "next": "latest",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "socket.io-client": "^4.7.5"
